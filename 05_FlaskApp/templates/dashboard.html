@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — SecureApp{% endblock %}
+{% block content %}
+<div class="page-container">
+    <div class="card">
+        <h2>👋 Welcome, {{ user.username }}!</h2>
+        <p>You are successfully logged in.</p>
+        <div class="info-grid">
+            <div class="info-item">
+                <span class="info-label">Username</span>
+                <span class="info-value">{{ user.username }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Role</span>
+                <span class="info-value">{{ user.role }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Status</span>
+                <span class="info-value" style="color:green;">✅ Authenticated</span>
+            </div>
+        </div>
+        {% if user.is_admin() %}
+        <div class="admin-notice">
+            <p>🛡️ You have admin privileges.
+                <a href="{{ url_for('admin') }}">Go to Admin Panel →</a>
+            </p>
+        </div>
+        {% endif %}
+    </div>
+    <div class="card">
+        <h3>🔐 Security Notice</h3>
+        <p>All login attempts and page accesses are logged with IP address and timestamp.</p>
+    </div>
+</div>
+{% endblock %}
